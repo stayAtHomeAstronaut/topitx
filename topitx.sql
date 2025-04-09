@@ -1,13 +1,12 @@
--- SAGEMAKER
--- ARN for Platform Prod: arn:aws:iam::487651640582:role/dbadmin_policy
+-- ARN for Platform Prod: arn:aws:iam::XXX:role/dbadmin_policy
 
--- Approach will be to find some 'troublsome panel serial numbers' and make a native Redshift table
--- with what are thought to be the relevent columns from panel_telemetry and MDM tables (inner joined)
+-- Approach will be to find some 'troublsome devices by serial number' and make a native Redshift table
+-- with what are thought to be the relevent columns from device_telemetry 
 -- then use the data in this table for training.
 -- After the model is trained and built, create a view for the 'test data' to run the model against.
 
 
--- top 500 panel event counts from Mixpanel
+-- top 575 device event counts from Mixpanel
 -- INSERT INTO trouble_panels (panel_serial_number,event_count) values ('775T-JC2U3A2470372','281601');
 -- the rest are in populate_trouble_panels.sql
 insert into trouble_panels (select "panel serial number" as panel_serial_number, count(event)::bigint as event_count from s3_external_schema.panel_telemetry where year = 2025 and month = 3 group by  "panel serial number" order by  count(event) desc limit 575);
