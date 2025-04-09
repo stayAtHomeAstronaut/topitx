@@ -6,7 +6,7 @@
 -- After the model is trained and built, create a view for the 'test data' to run the model against.
 
 
--- top 575 device event counts from Mixdevice
+-- top 575 device event counts from Mixpanel
 -- INSERT INTO trouble_devices (device_serial_number,event_count) values ('775T-JC2U3A2470372','281601');
 -- the rest are in populate_trouble_devices.sql
 insert into trouble_devices (select "device serial number" as device_serial_number, count(event)::bigint as event_count from s3_external_schema.device_telemetry where year = 2025 and month = 3 group by  "device serial number" order by  count(event) desc limit 575);
