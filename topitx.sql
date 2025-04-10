@@ -53,7 +53,7 @@ FROM  (select  left(device_serial_number,4) as device_prefix,event_count,app_bui
  TARGET hieventcountlikely
  FUNCTION trouble_prediction_function_config_only
  IAM_ROLE  'arn:aws:iam::XXX:role/dbadmin_policy'
- MODEL_TYPE LINEAR_LEARNER
+ MODEL_TYPE XGBOOST
  PROBLEM_TYPE BINARY_CLASSIFICATION
  OBJECTIVE 'F1'
  SETTINGS (
